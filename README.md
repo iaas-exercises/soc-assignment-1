@@ -19,3 +19,10 @@ The simple Node.js server application used in this exercise is found inside the 
 4. Install dependencies: `npm install`.
 5. Start the application: `npm start`.
 6. You can stop the application by pressing `Ctrl+C`.
+
+### Exposed endpoints
+
+- `http://127.0.0.1:3000/shopping-cart`
+- `http://127.0.0.1:3000/shopping-cart/{id}`
+- `http://127.0.0.1:3000/wisdom`
+- `http://127.0.0.1:3000/login`
