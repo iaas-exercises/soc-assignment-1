@@ -6,10 +6,10 @@ The simple Node.js server application used in this exercise is found inside the 
 
 ### Prerequisits
 
-1- Ensure that [Node.js is installed](https://nodejs.org/en/download/)
-2- (Recommended) [Visual Studio Code] (https://code.visualstudio.com/) is an extensible code editor that will help you work on small applications like this one.
-3- (Recommended) [Git](https://git-scm.com/downloads) Helps you manage git repositories, and comes with `bash`, a handy linux shell that allows us to execute certain commands easily.
-4- The application runs on port `3000`, so ensure it is free.
+1. Ensure that [Node.js is installed](https://nodejs.org/en/download/)
+2. (Recommended) [Visual Studio Code] (https://code.visualstudio.com/) is an extensible code editor that will help you work on small applications like this one.
+3. (Recommended) [Git](https://git-scm.com/downloads) Helps you manage git repositories, and comes with `bash`, a handy linux shell that allows us to execute certain commands easily.
+4. The application runs on port `3000`, so ensure it is free.
 
 ### How to start the server application (Windows)?
 
