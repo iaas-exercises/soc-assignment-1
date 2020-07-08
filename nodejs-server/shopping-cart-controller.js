@@ -7,7 +7,7 @@ const fs = require('fs');
 
 router.route('/')
     .get((req, res) => {
-        res.json(parseShoppingCartSync());
+        res.status(200).json(parseShoppingCartSync());
     })
     .post((req, res) => {
         console.debug('Post: item: %j', req.body);
@@ -24,7 +24,7 @@ router.route('/:itemIndex')
 
         if (itemIndex in jsonAll) {
             if (req.accepts('application/json')) {
-                res.json(jsonAll[itemIndex]);
+                res.status(200).json(jsonAll[itemIndex]);
             } else {
                 
                 res.setHeader('Content-type', 'text/html');

@@ -14,10 +14,8 @@ const PORT = 3000;
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.raw());
-
-
 
 /* '/' path */
 app.get('/', (req, res)=>{
