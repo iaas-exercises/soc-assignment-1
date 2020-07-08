@@ -1,0 +1,20 @@
+<html>
+
+<head>
+	<title>Add Item to Shopping Cart</title>
+</head>
+
+<body>
+	<h1>Please add an item to the shopping cart:</h1>
+	
+	<form id="theForm" name="itemAdd" method="POST" action="http://127.0.0.1:3000/shopping-cart">
+		<label>Item Name:</label>
+		<input type="text" name="name" /><br>
+		<label>Quantity: </label>
+		<input type="number" name="quantity" min="1" /><br>
+		<input type="submit" value="Send" />
+	</form>
+
+</body>
+
+</html>

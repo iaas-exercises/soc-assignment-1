@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+        <h1>Please log in:</h1>
+        <h2>POST-based Login</h2>
+		<form name="postLogin" method="POST" action="http://127.0.0.1:3000/login">
+			<label>Username:</label>
+			<input type="text" name="username" /><br>
+			<label>Password: </label>
+			<input type="password" name="password" /><br>
+			<input type="submit" value="Send" />
+		</form>
+		<h2>GET-based Login</h2>
+		<form name="getLogin" method="GET" action="http://127.0.0.1:3000/login">
+            <label>Username:</label>
+            <input type="text" name="username" /><br>
+            <label>Password: </label>
+            <input type="password" name="password" /><br>
+            <input type="submit" value="Send" />
+		</form>
+	</body>
+</html>
