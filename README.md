@@ -18,7 +18,7 @@ The simple Node.js server application used in this exercise is found inside the 
 3. Open the respective code directory: `cd ./nodejs-server`.
 4. Install dependencies: `npm install`.
 5. Start the application: `npm start`.
-6. You can stop the application by pressing `Ctrl+C`.
+6. You can stop the application by opening cmd or powershell and using the following command `taskkill /im node.exe /F`
 
 ### Exposed endpoints
 
