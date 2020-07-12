@@ -23,29 +23,69 @@ router.route('/:itemIndex')
         var jsonAll = parseShoppingCartSync();
 
         if (itemIndex in jsonAll) {
-            if (req.accepts('application/json')) {
-                res.status(200).json(jsonAll[itemIndex]);
-            } else {
-                
+            if (req.accepts('application/json') && req.accepts('text/html')) {
+                var html =
+                    `
+                <!DOCTYPE html>
+                    <html>
+                    
+                    <head>
+                        <meta charset='utf-8'>
+                        <title>Mutliple Choices</title>
+                    </head>
+                    
+                    <body>
+                        <H3>Multiple Choices</H3>
+                        <H4>Multiple representation of the requested item exist:</H4>
+                        <ul>
+                            <li> 
+                                JSON representation can be accessed via <a href="${common.getBaseUrl(req)}/shopping-cart/${itemIndex}/json">/shooping-cart/${itemIndex}/json</a>
+                            </li>
+                            <li> 
+                                HTML representation can be accessed via <a href="${common.getBaseUrl(req)}/shopping-cart/${itemIndex}/html">/shooping-cart/${itemIndex}/html</a>
+                            </li>
+                        </ul>
+                    </body>
+                    
+                    </html>
+                `;
+
+                res.status(300).contentType('text/html').send(html);
+            } else if (req.accepts('application/json')) {
+                var jsonRepresentation = jsonAll[itemIndex];
+                res.status(200).json(jsonRepresentation);
+            } else if (req.accepts('text/html')) {
                 res.setHeader('Content-type', 'text/html');
-                var html = 
-`<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset='utf-8'>
-    <title>Shopping List Item</title>
-</head>
-
-<body>
-    <H3>Shopping Cart Item</H3>
-    <p> <b>Item Key: </b> ${itemIndex}</p>
-    <p> <b>Item Name: </b> ${jsonAll[itemIndex].name} </p>
-    <p> <b>Item Quantity: </b> ${jsonAll[itemIndex].quantity} </p>
-</body>
-
-</html>`;
+                var html = generateHtmlRepresentation(itemIndex, jsonAll);
                 res.send(html);
+            } else {
+                var html =
+                    `
+                <!DOCTYPE html>
+                    <html>
+                    
+                    <head>
+                        <meta charset='utf-8'>
+                        <title>Not Accepted</title>
+                    </head>
+                    
+                    <body>
+                        <H3>Not Accepted</H3>
+                        <H4>User prferences cannot be matched by the server. Available options are:</H4>
+                        <ul>
+                            <li> 
+                                JSON representation can be accessed via <a href="${common.getBaseUrl(req)}/shopping-cart/${itemIndex}/json">/shooping-cart/${itemIndex}/json</a>
+                            </li>
+                            <li> 
+                                HTML representation can be accessed via <a href="${common.getBaseUrl(req)}/shopping-cart/${itemIndex}/html">/shooping-cart/${itemIndex}/html</a>
+                            </li>
+                        </ul>
+                    </body>
+                    
+                    </html>
+                `;
+
+                res.status(406).contentType('text/html').send(html);
             }
         } else {
             res.sendStatus(404);
@@ -82,6 +122,31 @@ router.route('/:itemIndex')
         }
     });
 
+router.route('/:itemIndex/json')
+    .get((req, res) => {
+        var itemIndex = req.params.itemIndex;
+        var jsonAll = parseShoppingCartSync();
+
+        if (itemIndex in jsonAll) {
+            var jsonRepresentation = jsonAll[itemIndex];
+            res.status(200).json(jsonRepresentation);
+        } else {
+            res.sendStatus(404);
+        }
+    });
+
+router.route('/:itemIndex/html')
+    .get((req, res) => {
+        var itemIndex = req.params.itemIndex;
+        var jsonAll = parseShoppingCartSync();
+
+        if (itemIndex in jsonAll) {
+            var html = generateHtmlRepresentation(itemIndex, jsonAll);
+            res.status(200).contentType('text/html').send(html);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 
 /* Helper Methods */
 function parseShoppingCartSync() {
@@ -113,6 +178,28 @@ function storeShoppingCartSync(allItemsDict) {
         // An error occurred
         console.error(err);
     }
+}
+
+function generateHtmlRepresentation(itemIndex, jsonAll) {
+    var htmlRepresentation =
+        `<!DOCTYPE html>
+    <html>
+    
+    <head>
+        <meta charset='utf-8'>
+        <title>Shopping List Item</title>
+    </head>
+    
+    <body>
+        <H3>Shopping Cart Item</H3>
+        <p> <b>Item Key: </b> ${itemIndex}</p>
+        <p> <b>Item Name: </b> ${jsonAll[itemIndex].name} </p>
+        <p> <b>Item Quantity: </b> ${jsonAll[itemIndex].quantity} </p>
+    </body>
+    
+    </html>`;
+
+    return htmlRepresentation;
 }
 
 
